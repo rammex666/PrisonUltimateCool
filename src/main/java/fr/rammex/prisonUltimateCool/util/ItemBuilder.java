@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ItemBuilder {
 
-    // TODO : adapter avec le InventoryPage
     public ItemStack createItemForInventory(String name, String id, int slot, int amount, Material material, List<String> lore){
         ItemStack item = new ItemStack(material, amount);
         ItemMeta itemMeta = item.getItemMeta();
