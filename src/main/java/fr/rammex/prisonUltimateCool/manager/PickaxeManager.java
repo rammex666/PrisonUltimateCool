@@ -2,10 +2,11 @@ package fr.rammex.prisonUltimateCool.manager;
 
 import fr.rammex.prisonUltimateCool.models.Pickaxe;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PickaxeManager {
-    private static Map<Pickaxe, String> pickaxeMap;
+    private static Map<Pickaxe, String> pickaxeMap = new HashMap<>();
 
     public static void addPickaxe(Pickaxe pickaxe,String playerUUID){
         pickaxeMap.put(pickaxe,playerUUID);

@@ -2,3 +2,6 @@ name: PrisonUltimateCool
 version: '1.0-SNAPSHOT'
 main: fr.rammex.prisonUltimateCool.PrisonUltimateCool
 api-version: '1.21'
+commands:
+  mine:
+    description: "commande de base"
