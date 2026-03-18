@@ -20,7 +20,7 @@ public class MineCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if(args[0].equals("give")){
-            ItemStack pickaxe = itemBuilder.createPickaxe(player);
+            ItemStack pickaxe = itemBuilder.createPickaxe("&7Pioche Du Départ",player);
             player.getInventory().addItem(pickaxe);
 
         } else if (args[0].equals("id")){

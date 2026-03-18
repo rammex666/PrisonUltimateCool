@@ -31,19 +31,20 @@ public class ItemBuilder {
         return item;
     }
 
-    public ItemStack createPickaxe(Player player){
+    public ItemStack createPickaxe(String name,Player player){
         ItemStack item = new ItemStack(Material.WOODEN_PICKAXE, 1);
         ItemMeta itemMeta = item.getItemMeta();
         List<String> itemLore = new ArrayList<>();
         Map<CustomEffect,Integer> effectOnPickaxe = new HashMap<>();
         String playerUUID = player.getUniqueId().toString();
 
-        itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&7Pioche Basique"));
+        itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&',name));
 
-        itemLore.add("* Pioche de : "+player.getName());
-        itemLore.add("----------------------");
+        itemLore.add(ChatColor.translateAlternateColorCodes('&',"&7* Pioche de : "+player.getName()));
+        itemLore.add(ChatColor.translateAlternateColorCodes('&',"&7----------------------"));
+        itemLore.add(" ");
         for(CustomEffect effect : effectOnPickaxe.keySet()){
-            itemLore.add("* "+effect.getName()+" ["+effectOnPickaxe.get(effect)+"/"+effect.getLevelMax()+"]");
+            itemLore.add(ChatColor.translateAlternateColorCodes('&',"&6* "+effect.getName()+" ["+effectOnPickaxe.get(effect)+"/"+effect.getLevelMax()+"]"));
         }
 
         itemMeta.setLore(itemLore);
