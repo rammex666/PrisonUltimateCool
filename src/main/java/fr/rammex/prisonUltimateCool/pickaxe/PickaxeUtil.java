@@ -1,11 +1,15 @@
 package fr.rammex.prisonUltimateCool.pickaxe;
 
 import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
+import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
+import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.Map;
 
 public class PickaxeUtil {
 
@@ -16,6 +20,24 @@ public class PickaxeUtil {
         NamespacedKey key = new NamespacedKey(PrisonUltimateCool.getInstance(), "pickaxe_id");
 
         return meta.getPersistentDataContainer().has(key, PersistentDataType.STRING);
+    }
+
+    public boolean pickaxeHaveEchant(Pickaxe pickaxe, String enchantID){
+        for (Map.Entry<String, Integer> entry : pickaxe.getCustomEffects().entrySet()) {
+            if(entry.getKey().equals(enchantID)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Integer getLevelEnchant(Pickaxe pickaxe, String enchantID){
+        return pickaxe.getCustomEffects().get(enchantID);
+    }
+
+    public ItemStack getPlayerPickaxeItemStack(Player player){
+        return player.getInventory().getItemInMainHand();
     }
 
     public Pickaxe getPlayerPickaxeHolding(Player player) {

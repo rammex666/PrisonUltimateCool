@@ -17,6 +17,7 @@ public class EffectMineEvent implements Listener {
 
     @EventHandler
     public void onMineEvent(BlockBreakEvent event){
+        // TODO : handle les cas où le joueur ne tien pas de pickaxe 
         System.out.println("test");
         Player player = event.getPlayer();
         if(pickaxeUtil.isPlayerHoldingAPickaxe(player)){

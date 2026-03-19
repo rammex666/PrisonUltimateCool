@@ -1,10 +1,15 @@
 package fr.rammex.prisonUltimateCool.pickaxe.effect.list;
 
+import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
-import org.bukkit.Effect;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.entity.CraftArmadillo;
+import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -43,5 +48,54 @@ public class Explosion {
                 List.of(),              // effets onEquip si besoin
                 explosionAction         // action BiConsumer
         );
+    }
+
+
+    //TODO : ça marche super bien plus qu'a crée l'effet tatourite
+    public static void spawnMeteor(Location target, Plugin plugin) {
+        World world = target.getWorld();
+        Location spawnLoc = target.clone().add(0, 40, 0);
+
+        Armadillo armadillo = (Armadillo) world.spawn(spawnLoc, Armadillo.class);
+
+        armadillo.setAI(true);
+        armadillo.setInvulnerable(true);
+        armadillo.setSilent(true);
+        armadillo.setGravity(true);
+        armadillo.rollUp();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                armadillo.setVelocity(new Vector(0, -2, 0));
+            }
+        }.runTaskLater(plugin, 1L);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!armadillo.isValid() || armadillo.isDead()) {
+                    cancel();
+                    return;
+                }
+
+                Vector current = armadillo.getVelocity();
+                if (current.getY() > -2.0) {
+                    armadillo.setVelocity(current.setY(Math.max(current.getY() - 0.1, -2.0)));
+                }
+
+                world.spawnParticle(Particle.FLAME, armadillo.getLocation(), 5, 0.2, 0.2, 0.2, 0.01);
+                world.spawnParticle(Particle.SMOKE, armadillo.getLocation(), 3, 0.1, 0.1, 0.1, 0.01);
+
+                world.playSound(armadillo.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.3f, 1.5f);
+
+                if (armadillo.isOnGround()) {
+                    world.createExplosion(armadillo.getLocation(), 4.0f, false, false);
+                    world.spawnParticle(Particle.EXPLOSION, armadillo.getLocation(), 1);
+                    armadillo.remove();
+                    cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 2L, 1L);
     }
 }

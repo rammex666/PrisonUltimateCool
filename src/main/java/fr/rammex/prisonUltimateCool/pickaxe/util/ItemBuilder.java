@@ -97,4 +97,30 @@ public class ItemBuilder {
 
         return item;
     }
+
+    public void UpdateLore(Pickaxe pickaxe,ItemStack itemStack,Player player){
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        Map<String, Integer> effectOnPickaxe = pickaxe.getCustomEffects();
+
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&7* Pioche de : " + player.getName()));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&7----------------------"));
+        lore.add(" ");
+
+        for (Map.Entry<String, Integer> entry : effectOnPickaxe.entrySet()) {
+            String effectId = entry.getKey();
+            int level = entry.getValue();
+
+            CustomEffect effect = CustomEffectRegistry.get(effectId);
+            if (effect == null) continue;
+
+            lore.add(ChatColor.translateAlternateColorCodes('&',
+                    "&6* " + effect.getName() + " [" + level + "/" + effect.getLevelMax() + "]"));
+        }
+
+        System.out.println("update du lore");
+
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+    }
 }
