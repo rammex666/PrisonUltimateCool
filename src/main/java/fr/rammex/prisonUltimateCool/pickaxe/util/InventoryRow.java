@@ -1,4 +1,4 @@
-package fr.rammex.prisonUltimateCool.util;
+package fr.rammex.prisonUltimateCool.pickaxe.util;
 
 public enum InventoryRow {
     CHEST_1(9),

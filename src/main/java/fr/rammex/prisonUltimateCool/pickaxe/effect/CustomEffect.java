@@ -1,7 +1,7 @@
-package fr.rammex.prisonUltimateCool.models;
+package fr.rammex.prisonUltimateCool.pickaxe.effect;
 
-import fr.rammex.prisonUltimateCool.util.ActionEffectUseType;
 import org.bukkit.Effect;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public class CustomEffect {
     private final Integer levelMax;
     private final double proc;
     private final List<Effect> onEquip;
-    private final BiConsumer<ActionEffectUseType, Player> action;
+    private final BiConsumer<Player, Block> action;
 
-    public CustomEffect(String id, String name, String description, Integer levelMax, double proc, List<Effect> onEquip, BiConsumer<ActionEffectUseType, Player> action){
+    public CustomEffect(String id, String name, String description, Integer levelMax, double proc, List<Effect> onEquip, BiConsumer<Player, Block> action){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -50,9 +50,9 @@ public class CustomEffect {
         return proc;
     }
 
-    public void onAction(Player player, ActionEffectUseType actionEffectUseType) {
+    public void onAction(Player player, Block block) {
         if (this.action != null) {
-            action.accept(actionEffectUseType, player);
+            action.accept(player, block);
         }
     }
 }

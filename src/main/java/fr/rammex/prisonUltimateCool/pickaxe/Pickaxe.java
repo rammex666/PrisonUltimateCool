@@ -1,4 +1,4 @@
-package fr.rammex.prisonUltimateCool.models;
+package fr.rammex.prisonUltimateCool.pickaxe;
 
 import org.bukkit.enchantments.Enchantment;
 
@@ -10,9 +10,9 @@ public class Pickaxe {
     private String owner; // attend un UUID d'un player
     private final String dateCreation;
     private List<Enchantment> enchantments;
-    private Map<CustomEffect, Integer> customEffects;
+    private Map<String, Integer> customEffects;
 
-    public Pickaxe(String id, String owner, String dateCreation, List<Enchantment> enchantments, Map<CustomEffect,Integer> customEffects){
+    public Pickaxe(String id, String owner, String dateCreation, List<Enchantment> enchantments, Map<String, Integer> customEffects){
         this.id = id;
         this.owner = owner;
         this.dateCreation = dateCreation;
@@ -24,7 +24,7 @@ public class Pickaxe {
         return id;
     }
 
-    public Map<CustomEffect,Integer> getCustomEffects() {
+    public Map<String,Integer> getCustomEffects() {
         return customEffects;
     }
 
@@ -52,7 +52,7 @@ public class Pickaxe {
         this.enchantments = enchantments;
     }
 
-    public void setCustomEffects(Map<CustomEffect,Integer> customEffects) {
+    public void setCustomEffects(Map<String,Integer> customEffects) {
         this.customEffects = customEffects;
     }
 }

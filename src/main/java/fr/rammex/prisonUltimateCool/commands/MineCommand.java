@@ -1,7 +1,7 @@
 package fr.rammex.prisonUltimateCool.commands;
 
 import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
-import fr.rammex.prisonUltimateCool.util.ItemBuilder;
+import fr.rammex.prisonUltimateCool.pickaxe.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
