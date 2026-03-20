@@ -3,8 +3,6 @@ package fr.rammex.prisonUltimateCool.mine;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
-import fr.rammex.prisonUltimateCool.pickaxe.PickaxeSerializer;
 
 import java.io.*;
 import java.lang.reflect.Type;

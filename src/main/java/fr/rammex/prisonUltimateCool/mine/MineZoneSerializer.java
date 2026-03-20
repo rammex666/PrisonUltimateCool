@@ -1,17 +1,11 @@
 package fr.rammex.prisonUltimateCool.mine;
 
 import com.google.gson.*;
-import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MineZoneSerializer implements JsonSerializer<MineZone>, JsonDeserializer<MineZone> {
 

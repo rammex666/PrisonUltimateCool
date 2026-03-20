@@ -1,6 +1,5 @@
 package fr.rammex.prisonUltimateCool.mine.util;
 
-import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
 import fr.rammex.prisonUltimateCool.mine.MineZone;
 import fr.rammex.prisonUltimateCool.mine.MineZoneManager;
 import org.bukkit.Bukkit;
@@ -12,7 +11,6 @@ import org.bukkit.util.BoundingBox;
 import java.util.Map;
 
 public class MineUtil {
-    private final PrisonUltimateCool plugin = PrisonUltimateCool.getInstance();
 
     public boolean isPlayerInAMine(Player player){
 
