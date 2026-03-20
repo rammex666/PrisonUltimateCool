@@ -2,6 +2,7 @@ package fr.rammex.prisonUltimateCool.pickaxe.events;
 
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
+import fr.rammex.prisonUltimateCool.mine.util.MineUtil;
 import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
 import fr.rammex.prisonUltimateCool.pickaxe.PickaxeUtil;
 import org.bukkit.block.Block;
@@ -13,15 +14,19 @@ import org.bukkit.event.block.BlockBreakEvent;
 import java.util.Map;
 
 public class EffectMineEvent implements Listener {
-    PickaxeUtil pickaxeUtil = new PickaxeUtil();
+    private final PickaxeUtil pickaxeUtil = new PickaxeUtil();
+    private final MineUtil mineUtil = new MineUtil();
 
     @EventHandler
     public void onMineEvent(BlockBreakEvent event){
-        // TODO : handle les cas où le joueur ne tien pas de pickaxe 
-        System.out.println("test");
         Player player = event.getPlayer();
+
+        if(!mineUtil.isPlayerInAMine(player)){
+            player.sendMessage("&cVous devez être dans une mine pour miner!");
+            event.setCancelled(true);
+        } 
+
         if(pickaxeUtil.isPlayerHoldingAPickaxe(player)){
-            System.out.println("player tien une pickaxe");
             Pickaxe playerPickaxe = pickaxeUtil.getPlayerPickaxeHolding(player);
             handleProc(playerPickaxe, event.getBlock(), player);
         }
