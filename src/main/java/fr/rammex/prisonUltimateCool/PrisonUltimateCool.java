@@ -1,6 +1,7 @@
 package fr.rammex.prisonUltimateCool;
 
 import fr.rammex.prisonUltimateCool.commands.MineCommand;
+import fr.rammex.prisonUltimateCool.mine.MineZoneManager;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Efficiency;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Explosion;
@@ -15,6 +16,7 @@ public final class PrisonUltimateCool extends JavaPlugin {
 
     private static PrisonUltimateCool instance;
     private PickaxeManager pickaxeManager;
+    private MineZoneManager mineZoneManager;
 
     @Override
     public void onEnable() {
@@ -22,6 +24,9 @@ public final class PrisonUltimateCool extends JavaPlugin {
 
         this.pickaxeManager = new PickaxeManager();
         PickaxeManager.init(getDataFolder());
+        this.mineZoneManager = new MineZoneManager();
+        MineZoneManager.init(getDataFolder());
+
 
         registerCommands();
         registerEvents();
@@ -29,7 +34,8 @@ public final class PrisonUltimateCool extends JavaPlugin {
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
             PickaxeManager.save();
-            System.out.println("save des pioches");
+            MineZoneManager.save();
+            Bukkit.getLogger().info("save des pioches et mines");
         }, 20 * 300, 20 * 300); // 5 minutes et ça save
 
     }
@@ -37,6 +43,7 @@ public final class PrisonUltimateCool extends JavaPlugin {
     @Override
     public void onDisable() {
         PickaxeManager.save();
+        MineZoneManager.save();
     }
 
     private void registerCommands(){
@@ -56,5 +63,8 @@ public final class PrisonUltimateCool extends JavaPlugin {
 
     public PickaxeManager getPickaxeManager() {
         return pickaxeManager;
+    }
+    public MineZoneManager getMineZoneManager(){
+        return mineZoneManager;
     }
 }
