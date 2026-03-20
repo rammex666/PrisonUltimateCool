@@ -27,6 +27,8 @@ public class MineZoneSerializer implements JsonSerializer<MineZone>, JsonDeseria
         obj.addProperty("x2", mineZone.getX2());
         obj.addProperty("y1", mineZone.getY1());
         obj.addProperty("y2", mineZone.getY2());
+        obj.addProperty("z1", mineZone.getZ1());
+        obj.addProperty("z2", mineZone.getZ2());
 
 
         JsonArray blocksArray = new JsonArray();
@@ -57,6 +59,8 @@ public class MineZoneSerializer implements JsonSerializer<MineZone>, JsonDeseria
         double x2 = obj.get("x2").getAsDouble();
         double y1 = obj.get("y1").getAsDouble();
         double y2 = obj.get("y2").getAsDouble();
+        double z1 = obj.get("z1").getAsDouble();
+        double z2 = obj.get("z2").getAsDouble();
 
         List<Material> blocksMine = new ArrayList<>();
 
@@ -75,6 +79,6 @@ public class MineZoneSerializer implements JsonSerializer<MineZone>, JsonDeseria
             }
         }
 
-        return new MineZone(id, name, worldName, blocksMine, x1, x2, y1, y2, resetCooldown);
+        return new MineZone(id, name, worldName, blocksMine, x1, x2, y1, y2, z1, z2, resetCooldown);
     }
 }

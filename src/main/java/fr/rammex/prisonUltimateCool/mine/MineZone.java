@@ -15,9 +15,11 @@ public class MineZone {
     private final double x2;
     private final double y1;
     private final double y2;
+    private final double z1;
+    private final double z2;
     private final int resetCooldown;
 
-    public MineZone(String id, String name, String worldName, List<Material> blocksMine, double x1, double x2, double y1, double y2, int resetCooldown){
+    public MineZone(String id, String name, String worldName, List<Material> blocksMine, double x1, double x2, double y1, double y2, double z1, double z2, int resetCooldown){
         this.id = id;
         this.name = name;
         this.worldName = worldName;
@@ -26,6 +28,8 @@ public class MineZone {
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
+        this.z1 = z1;
+        this.z2 = z2;
         this.resetCooldown = resetCooldown;
     }
 
@@ -55,6 +59,14 @@ public class MineZone {
 
     public double getY2() {
         return y2;
+    }
+
+    public double getZ1(){
+        return z1;
+    }
+
+    public double getZ2() {
+        return z2;
     }
 
     public int getResetCooldown() {
