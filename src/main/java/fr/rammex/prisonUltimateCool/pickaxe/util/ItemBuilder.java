@@ -20,6 +20,7 @@ import java.util.*;
 
 public class ItemBuilder {
 
+    @SuppressWarnings("deprecation")
     public ItemStack createItemForInventory(String name, String id, int slot, int amount, Material material, List<String> lore){
         ItemStack item = new ItemStack(material, amount);
         ItemMeta itemMeta = item.getItemMeta();
@@ -31,7 +32,20 @@ public class ItemBuilder {
 
         return item;
     }
+    
+    @SuppressWarnings("deprecation")
+    public ItemStack createMineZoneTool(){
+        ItemStack item = new ItemStack(Material.STICK, 1);
+        ItemMeta itemMeta = item.getItemMeta();
 
+        itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6MineZone Tool"));
+        item.setItemMeta(itemMeta);
+
+        return item;
+    }
+
+
+    @SuppressWarnings("deprecation")
     public ItemStack createPickaxe(String name, Player player) {
 
         ItemStack item = new ItemStack(Material.WOODEN_PICKAXE, 1);
@@ -98,6 +112,7 @@ public class ItemBuilder {
         return item;
     }
 
+    @SuppressWarnings("deprecation")
     public void UpdateLore(Pickaxe pickaxe,ItemStack itemStack,Player player){
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> lore = new ArrayList<>();

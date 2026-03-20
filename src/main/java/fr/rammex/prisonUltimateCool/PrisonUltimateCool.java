@@ -3,6 +3,8 @@ package fr.rammex.prisonUltimateCool;
 import fr.rammex.prisonUltimateCool.commands.MineCommand;
 import fr.rammex.prisonUltimateCool.mine.MineZoneManager;
 import fr.rammex.prisonUltimateCool.mine.MineZoneResetManager;
+import fr.rammex.prisonUltimateCool.mine.events.MineZoneCreateListener;
+import fr.rammex.prisonUltimateCool.mine.util.MineUtil;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Efficiency;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Explosion;
@@ -18,16 +20,22 @@ public final class PrisonUltimateCool extends JavaPlugin {
     private static PrisonUltimateCool instance;
     private PickaxeManager pickaxeManager;
     private MineZoneManager mineZoneManager;
+    private MineUtil mineUtil;
+    private MineZoneCreateListener mineZoneCreateListener;
 
     @Override
     public void onEnable() {
         instance = this;
+
+        this.mineUtil = new MineUtil();
 
         this.pickaxeManager = new PickaxeManager();
         PickaxeManager.init(getDataFolder());
 
         this.mineZoneManager = new MineZoneManager();
         MineZoneManager.init(getDataFolder());
+
+        this.mineZoneCreateListener = new MineZoneCreateListener();
 
         MineZoneResetManager.init(instance);
         MineZoneResetManager.startAll();
@@ -56,7 +64,10 @@ public final class PrisonUltimateCool extends JavaPlugin {
         this.getCommand("mine").setExecutor(new MineCommand());
     }
 
-    private void registerEvents(){ getServer().getPluginManager().registerEvents(new EffectMineEvent(), this);}
+    private void registerEvents(){ 
+        getServer().getPluginManager().registerEvents(new EffectMineEvent(), this);
+        getServer().getPluginManager().registerEvents(this.mineZoneCreateListener, this);
+    }
 
     private void registerEffects(){
         CustomEffectRegistry.register(Explosion.explosionEffect());
@@ -72,5 +83,13 @@ public final class PrisonUltimateCool extends JavaPlugin {
     }
     public MineZoneManager getMineZoneManager(){
         return mineZoneManager;
+    }
+
+    public MineUtil getMineUtil() {
+        return mineUtil;
+    }
+
+    public MineZoneCreateListener getMineZoneCreateListener() {
+        return mineZoneCreateListener;
     }
 }

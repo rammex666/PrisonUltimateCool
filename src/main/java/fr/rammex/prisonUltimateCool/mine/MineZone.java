@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import java.util.List;
 
 public class MineZone {
+    // Ne pas oublier ! quand on crée une mine dans le code il faut start le timer et l'ajouter dans le manager.
     //TODO : ajouter le système de rank require pour aller dans la zone quand le sys de rank seras fait
     private final String id;
     private final String name;

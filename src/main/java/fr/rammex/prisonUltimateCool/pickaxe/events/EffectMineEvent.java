@@ -2,6 +2,7 @@ package fr.rammex.prisonUltimateCool.pickaxe.events;
 
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
+import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
 import fr.rammex.prisonUltimateCool.mine.util.MineUtil;
 import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
 import fr.rammex.prisonUltimateCool.pickaxe.PickaxeUtil;
@@ -15,13 +16,13 @@ import java.util.Map;
 
 public class EffectMineEvent implements Listener {
     private final PickaxeUtil pickaxeUtil = new PickaxeUtil();
-    private final MineUtil mineUtil = new MineUtil();
+    private final MineUtil mineUtil = PrisonUltimateCool.getInstance().getMineUtil();
 
     @EventHandler
     public void onMineEvent(BlockBreakEvent event){
         Player player = event.getPlayer();
 
-        if(!mineUtil.isPlayerInAMine(player)){
+        if(!mineUtil.isPlayerInAMine(player) && !mineUtil.bypass){
             player.sendMessage("&cVous devez être dans une mine pour miner!");
             event.setCancelled(true);
         } 

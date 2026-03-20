@@ -11,6 +11,7 @@ import org.bukkit.util.BoundingBox;
 import java.util.Map;
 
 public class MineUtil {
+    public boolean bypass = false;
 
     public boolean isPlayerInAMine(Player player){
 
@@ -30,7 +31,7 @@ public class MineUtil {
                     new Location(world, x2, y2, z2)
             );
 
-            if(box.contains(player.getLocation().toVector())){
+            if(box.contains(player.getLocation().add(1,1,1).toVector())){
                 return true;
             }
         }
