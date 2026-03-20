@@ -30,12 +30,12 @@ public class MineUtil {
                     new Location(world, x1, y1, z1),
                     new Location(world, x2, y2, z2)
             );
-
+            //TODO: il faut que le ca check si le joueur est pas un peu en dessous de la mine 
             if(box.contains(player.getLocation().add(1,1,1).toVector())){
                 return true;
             }
         }
-
+ 
 
         return false;
     }
