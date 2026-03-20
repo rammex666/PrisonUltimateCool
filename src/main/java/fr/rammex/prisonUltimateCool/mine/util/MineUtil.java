@@ -30,7 +30,9 @@ public class MineUtil {
                     new Location(world, x2, y2, z2)
             );
 
-            return box.contains(player.getLocation().toVector());
+            if(box.contains(player.getLocation().toVector())){
+                return true;
+            }
         }
 
 

@@ -2,6 +2,7 @@ package fr.rammex.prisonUltimateCool;
 
 import fr.rammex.prisonUltimateCool.commands.MineCommand;
 import fr.rammex.prisonUltimateCool.mine.MineZoneManager;
+import fr.rammex.prisonUltimateCool.mine.MineZoneResetManager;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Efficiency;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Explosion;
@@ -24,8 +25,12 @@ public final class PrisonUltimateCool extends JavaPlugin {
 
         this.pickaxeManager = new PickaxeManager();
         PickaxeManager.init(getDataFolder());
+
         this.mineZoneManager = new MineZoneManager();
         MineZoneManager.init(getDataFolder());
+
+        MineZoneResetManager.init(instance);
+        MineZoneResetManager.startAll();
 
 
         registerCommands();
@@ -44,6 +49,7 @@ public final class PrisonUltimateCool extends JavaPlugin {
     public void onDisable() {
         PickaxeManager.save();
         MineZoneManager.save();
+        MineZoneResetManager.shutdown();
     }
 
     private void registerCommands(){
