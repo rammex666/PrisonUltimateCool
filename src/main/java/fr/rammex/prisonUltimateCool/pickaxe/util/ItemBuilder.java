@@ -55,7 +55,6 @@ public class ItemBuilder {
 
         Map<String, Integer> effectOnPickaxe = new HashMap<>();
         effectOnPickaxe.put("EXPLOSION",1);
-        effectOnPickaxe.put("EFFICIENCY",7);
 
         String playerUUID = player.getUniqueId().toString();
 

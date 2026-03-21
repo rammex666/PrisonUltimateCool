@@ -1,8 +1,6 @@
 package fr.rammex.prisonUltimateCool.pickaxe;
 
 import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
-import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
-import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +11,7 @@ import java.util.Map;
 
 public class PickaxeUtil {
 
+    @SuppressWarnings("deprecation")
     public boolean isPlayerHoldingAPickaxe(Player player){
         ItemStack itemInHand = player.getItemInHand();
 

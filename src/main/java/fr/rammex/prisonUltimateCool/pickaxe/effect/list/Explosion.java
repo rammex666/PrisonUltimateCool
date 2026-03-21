@@ -1,10 +1,8 @@
 package fr.rammex.prisonUltimateCool.pickaxe.effect.list;
 
-import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.entity.CraftArmadillo;
 import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;

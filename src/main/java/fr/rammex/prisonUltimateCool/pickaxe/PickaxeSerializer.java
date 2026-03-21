@@ -38,6 +38,7 @@ public class PickaxeSerializer implements JsonSerializer<Pickaxe>, JsonDeseriali
         return obj;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Pickaxe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 

@@ -2,7 +2,6 @@ package fr.rammex.prisonUltimateCool.pickaxe.effect;
 
 import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
 import fr.rammex.prisonUltimateCool.pickaxe.PickaxeUtil;
-import org.bukkit.entity.Player;
 
 import java.util.Map;
 
