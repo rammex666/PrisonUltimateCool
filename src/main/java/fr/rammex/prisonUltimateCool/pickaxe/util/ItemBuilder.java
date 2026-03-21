@@ -88,6 +88,10 @@ public class ItemBuilder {
         );
 
         item.setItemMeta(itemMeta);
+        // pour bypass la limitation de l'enchantement
+        // item.addUnsafeEnchantment(null, 0);
+        
+        // TODO : changer la liste<Enchantement> en Map<Enchantement, Integer> pour gérer les niveaux d'enchantement et pas seulement leur présence
 
         LocalDate today = LocalDate.now();
 
