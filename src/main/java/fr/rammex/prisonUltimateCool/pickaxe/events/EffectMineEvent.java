@@ -48,7 +48,6 @@ public class EffectMineEvent implements Listener {
             double finalChance = 1 - Math.pow(1 - effect.getProc(), ratio * effect.getLevelMax());
 
             if (Math.random() <= finalChance) {
-                System.out.println("proc");
                 effect.onAction(player, origin);
             }
         }

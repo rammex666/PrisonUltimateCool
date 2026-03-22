@@ -1,7 +1,10 @@
 package fr.rammex.prisonUltimateCool.pickaxe.effect.list;
 
+import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffect;
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.Player;
@@ -21,7 +24,7 @@ public class Explosion {
             if (block == null || block.getType() == Material.AIR) return;
 
             int radius = 1; // rayon de l'explosion
-
+            spawnMeteor(block.getLocation(), PrisonUltimateCool.getInstance());
             for (int x = -radius; x <= radius; x++) {
                 for (int y = -radius; y <= radius; y++) {
                     for (int z = -radius; z <= radius; z++) {
@@ -55,6 +58,10 @@ public class Explosion {
         Location spawnLoc = target.clone().add(0, 40, 0);
 
         Armadillo armadillo = (Armadillo) world.spawn(spawnLoc, Armadillo.class);
+        AttributeInstance size = armadillo.getAttribute(Attribute.SCALE);
+        if(size != null) {
+            size.setBaseValue(3.0);
+        }
 
         armadillo.setAI(true);
         armadillo.setInvulnerable(true);

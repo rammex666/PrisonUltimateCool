@@ -64,7 +64,7 @@ public class MineZoneSerializer implements JsonSerializer<MineZone>, JsonDeseria
             for (JsonElement e : materialArray) {
                 JsonObject blocksMineOjb = e.getAsJsonObject();
 
-                String key = blocksMineOjb.get("key").getAsString();
+                String key = blocksMineOjb.get("type").getAsString();
 
                 Material material = Material.getMaterial(key);
                 if (material != null) {

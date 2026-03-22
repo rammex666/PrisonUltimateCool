@@ -17,17 +17,11 @@ public class PickaxeSerializer implements JsonSerializer<Pickaxe>, JsonDeseriali
         obj.addProperty("owner", pickaxe.getOwner());
         obj.addProperty("dateCreation", pickaxe.getDateCreation());
 
-        JsonArray enchantsArray = new JsonArray();
-        for (Enchantment ench : pickaxe.getEnchantments()) {
-            JsonObject enchObj = new JsonObject();
-
-            enchObj.addProperty("key", ench.getKey().getKey());
-
-            enchObj.addProperty("level", 1);
-
-            enchantsArray.add(enchObj);
+        JsonObject enchantObjt = new JsonObject();
+        for (Map.Entry<Enchantment, Integer> entry : pickaxe.getEnchantments().entrySet()) {
+            enchantObjt.addProperty(entry.getKey().getKey().getKey(), entry.getValue());
         }
-        obj.add("enchantments", enchantsArray);
+        obj.add("enchantments", enchantObjt);
 
         JsonObject effectsObj = new JsonObject();
         for (Map.Entry<String, Integer> entry : pickaxe.getCustomEffects().entrySet()) {
@@ -48,20 +42,14 @@ public class PickaxeSerializer implements JsonSerializer<Pickaxe>, JsonDeseriali
         String owner = obj.get("owner").getAsString();
         String date = obj.get("dateCreation").getAsString();
 
-        List<Enchantment> enchantments = new ArrayList<>();
+        Map<Enchantment, Integer> enchantments = new HashMap<>();
 
         if (obj.has("enchantments")) {
-            JsonArray enchantsArray = obj.getAsJsonArray("enchantments");
+            JsonObject enchantObj = obj.getAsJsonObject("enchantments");
 
-            for (JsonElement e : enchantsArray) {
-                JsonObject enchObj = e.getAsJsonObject();
-
-                String key = enchObj.get("key").getAsString();
-
-                Enchantment ench = Enchantment.getByKey(NamespacedKey.minecraft(key));
-                if (ench != null) {
-                    enchantments.add(ench);
-                }
+            for (String key : enchantObj.keySet()) {
+                int level = enchantObj.get(key).getAsInt();
+                enchantments.put(Enchantment.getByKey(NamespacedKey.minecraft(key)), level);
             }
         }
 
