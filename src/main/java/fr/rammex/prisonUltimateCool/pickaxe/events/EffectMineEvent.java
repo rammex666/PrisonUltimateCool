@@ -6,6 +6,7 @@ import fr.rammex.prisonUltimateCool.PrisonUltimateCool;
 import fr.rammex.prisonUltimateCool.mine.util.MineUtil;
 import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
 import fr.rammex.prisonUltimateCool.pickaxe.PickaxeUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,7 @@ public class EffectMineEvent implements Listener {
         Player player = event.getPlayer();
 
         if(!mineUtil.isPlayerInAMine(player) && !mineUtil.bypass){
-            player.sendMessage("&cVous devez être dans une mine pour miner!");
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&cVous devez être dans une mine pour miner!"));
             event.setCancelled(true);
         } 
 
@@ -37,7 +38,6 @@ public class EffectMineEvent implements Listener {
     public static void handleProc(Pickaxe pickaxe, Block origin, Player player) {
 
         for (Map.Entry<String, Integer> entry : pickaxe.getCustomEffects().entrySet()) {
-            System.out.println(entry.getKey());
 
             CustomEffect effect = CustomEffectRegistry.get(entry.getKey());
             if (effect == null) continue;

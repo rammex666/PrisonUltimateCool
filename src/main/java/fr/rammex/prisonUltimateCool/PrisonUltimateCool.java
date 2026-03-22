@@ -9,6 +9,7 @@ import fr.rammex.prisonUltimateCool.pickaxe.effect.CustomEffectRegistry;
 import fr.rammex.prisonUltimateCool.pickaxe.effect.list.Explosion;
 import fr.rammex.prisonUltimateCool.pickaxe.events.EffectMineEvent;
 import fr.rammex.prisonUltimateCool.pickaxe.PickaxeManager;
+import fr.rammex.prisonUltimateCool.pickaxe.events.PickaxeMenuListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -66,6 +67,7 @@ public final class PrisonUltimateCool extends JavaPlugin {
     private void registerEvents(){ 
         getServer().getPluginManager().registerEvents(new EffectMineEvent(), this);
         getServer().getPluginManager().registerEvents(this.mineZoneCreateListener, this);
+        getServer().getPluginManager().registerEvents(new PickaxeMenuListener(), this);
     }
 
     private void registerEffects(){
