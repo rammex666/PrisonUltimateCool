@@ -8,10 +8,8 @@ import java.util.Map;
 public class LevelManager {
     PickaxeUtil pickaxeUtil = new PickaxeUtil();
 
-    // Check juste si l'enchant peut level up en fonction du cap level et si l'enchant est bien sur la pickaxe du joueur
     public boolean canCustomEffectLevelUP(Pickaxe pickaxe, String customEffectID){
         if(pickaxeUtil.pickaxeHaveEchant(pickaxe,customEffectID)){
-            System.out.println("la pickaxe a l'enchant");
             int levelMax = CustomEffectRegistry.get(customEffectID).getLevelMax();
             return pickaxeUtil.getLevelEnchant(pickaxe, customEffectID) < levelMax;
         }
@@ -19,7 +17,6 @@ public class LevelManager {
     }
 
     public void levelUpCustomEnchant(Pickaxe pickaxe, String customEffectID){
-        System.out.println("level up de "+customEffectID);
         Map<String,Integer> enchants = pickaxe.getCustomEffects();
         enchants.put(customEffectID,enchants.get(customEffectID)+1);
         pickaxe.setCustomEffects(enchants);

@@ -1,6 +1,9 @@
 package fr.rammex.prisonUltimateCool;
 
 import fr.rammex.prisonUltimateCool.commands.MineCommand;
+import fr.rammex.prisonUltimateCool.economy.EconomyAPI;
+import fr.rammex.prisonUltimateCool.economy.EconomyManager;
+import fr.rammex.prisonUltimateCool.economy.EconomyRepository;
 import fr.rammex.prisonUltimateCool.mine.MineZoneManager;
 import fr.rammex.prisonUltimateCool.mine.MineZoneResetManager;
 import fr.rammex.prisonUltimateCool.mine.events.MineZoneCreateListener;
@@ -13,9 +16,9 @@ import fr.rammex.prisonUltimateCool.pickaxe.events.PickaxeMenuListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class PrisonUltimateCool extends JavaPlugin {
+import java.sql.SQLException;
 
-    //TODO : remove tout les sys out
+public final class PrisonUltimateCool extends JavaPlugin {
 
     private static PrisonUltimateCool instance;
     private PickaxeManager pickaxeManager;
@@ -44,6 +47,18 @@ public final class PrisonUltimateCool extends JavaPlugin {
         registerCommands();
         registerEvents();
         registerEffects();
+
+        try {
+            EconomyRepository repository = new EconomyRepository(this);
+            EconomyManager economyManager = new EconomyManager(this, repository);
+
+            // Init API statique
+            EconomyAPI.init(economyManager);
+
+        } catch (SQLException e) {
+            getLogger().severe("Impossible d'initialiser l'economy : " + e.getMessage());
+            getServer().getPluginManager().disablePlugin(this);
+        }
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
             PickaxeManager.save();

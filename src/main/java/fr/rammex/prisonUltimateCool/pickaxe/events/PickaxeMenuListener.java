@@ -3,11 +3,14 @@ package fr.rammex.prisonUltimateCool.pickaxe.events;
 import fr.rammex.prisonUltimateCool.pickaxe.Pickaxe;
 import fr.rammex.prisonUltimateCool.pickaxe.PickaxeUtil;
 import fr.rammex.prisonUltimateCool.pickaxe.gui.MainInventoryPickaxe;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class PickaxeMenuListener implements Listener {
     PickaxeUtil pickaxeUtil = new PickaxeUtil();
@@ -27,6 +30,23 @@ public class PickaxeMenuListener implements Listener {
                     event.setCancelled(true);
                     mainInventoryPickaxe.openInventory(pickaxe,player);
                     break;
+            }
+        }
+    }
+
+    @EventHandler
+    public void playerInteractInventory(InventoryClickEvent event){
+        Player player = (Player) event.getWhoClicked();
+        String inventoryName = event.getView().getTitle();
+        ItemStack itemClicked = event.getCurrentItem();
+
+        if(inventoryName.equals(ChatColor.translateAlternateColorCodes('&',"&dMenu Pioche"))){
+            if(itemClicked.hasItemMeta()){
+                if(itemClicked.getItemMeta().getLore().contains(
+                        ChatColor.translateAlternateColorCodes('&',"&d---------------------------------")
+                )){
+
+                }
             }
         }
     }
